@@ -1,0 +1,143 @@
+<!-- The buttons to control the stream -->
+<html>
+
+  <head>
+      <title>emotion detection</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+      <link rel="stylesheet" href="\css\home.css">
+      <script src="app.js"></script>
+      <script src="https://sdk.scdn.co/spotify-player.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="\js\player.js"></script>
+  </head>
+
+  <body  onload="onPageLoad()">
+
+    <div id="mardiv">
+
+      <!-- heading -->
+      <div id="heading" class="play-area">
+        <h1 id="head" style="color: #ffffff;">G-Lock</h1>
+      </div>
+
+      <!-- button and canvas -->
+      <div class="d-flex justify-content-around">
+
+        <!-- buttons -->
+        <div class="button-group d-flex flex-column align-items-center">
+          <button id="btn-start" type="button" class="button">Start video Stream</button>
+          <button id="btn-stop" type="button" class="button">Stop video Stream</button>
+          <button id="btn-capture" type="button" class="button">Capture Image</button>
+        </div>
+
+        <!-- Video Element & Canvas -->
+        <div class="play-area1 vediocandiv">
+
+          <div class="play-area-sub">
+            <video id="stream" width="432" height="324"></video>
+            <div id="snapshot" display="none"></div>
+          </div>
+
+          <div class="play-area-sub1">
+            <small class="copyright"><p style="color: #fdfcfc;">Integrated with Spotify <i class="fab fa-spotify" style="color: green;"><img src="/img/logo.png" style="max-height:33px; max-width:33px;"></img></i></p></small>
+            <h3 id="emoji">&#128064</h3>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- music box   -->
+      <div class="d-flex justify-content-around" >
+
+        <!-- form -->
+        <div id="tokenSection" class="play-area d-flex flex-column align-items-center">
+          <input class="btn btn-primary mb-3" type="button" onclick="requestAuthorization()" value="Login to spotify">
+
+          <div>
+            <label for="devices" class="mb-2 form-label"><p style="color: #fdfcfc;">Devices</p></label>
+            <select id="devices" class="form-control"></select>
+            <br>
+            <label for="playlist" class="mb-2 form-label"><p style="display:none;color: #ffffff;">Playlist</p></label>
+            <input id="playlist" class="form-control" style="display:none;"></input>
+
+            <div class="d-flex justify-content-between">
+              <input class="btn btn-primary btn-sm button1" type="button" onclick="refreshDevices();" value="Refresh Devices">
+              <input type="button" class="btn btn-primary button2" onclick="transfer()" value="Play in Device">    
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- now playing -->
+        <div id="deviceSection" class="play-area justify-content-around">
+
+          <div style="display: none;">
+            <label for="playlists" class="form-label"><p style="color: #ffffff;">Playlists</p></label>
+            <select id="playlists" class="form-control"></select>
+            <input class="btn btn-primary btn-sm mt-3" type="button" onclick="refreshPlaylists()" value="Refresh Playlists">
+          </div>
+
+          <div style="display: none;">
+            <label for="tracks" class="form-label"><p style="color: #ffffff;">Tracks</p></label>
+            <select id="tracks" class="form-control"></select>
+            <input class="btn btn-primary btn-sm mt-3" type="button" onclick="fetchTracks()" value="Fetch Tracks">
+          </div>
+
+          <div style="display: none;">
+            <label for="tracks" class="form-label"><p style="color: #ffffff;">Album</p></label>
+            <input id="album" class="form-control">
+          </div>
+
+          <input style="display: none;" type="button" class="btn btn-primary btn-sm mt-3" onclick="currentlyPlaying()" value="Refresh Currently Playing">
+          <img id="albumImage" src="">
+
+          <div class="d-flex flex-column justify-content-between">
+            <h3 class="mb-0" id="current"><p style="color: #ffffff;">Currently Playing</p></h3>
+            <div id="trackTitle" style="color: #ffffff;">No track</div>
+            <div id="trackArtist" style="color: #ffffff;" class="mb-2">-</div>
+
+            <div class="d-flex align-items-end">
+              <input type="button" class="btn btn-primary button3" onclick="previous1()" value="Prev" style="display:none;">
+              <input type="button" class="btn btn-primary button3" onclick="play2()" value="Play">
+              <input type="button" class="btn btn-primary button3" onclick="shuffle1()" value="Shuffle" style="display:none;">
+              <input type="button" class="btn btn-primary button3" onclick="pause1()" value="Pause">
+              <input type="button" class="btn btn-primary button3" onclick="next1()" value="Next" style="display:none;">
+            </div>
+
+          </div>
+
+          <div style="display: none;">
+            <div id="radioButtons"></div>
+            <input type="button" class="btn btn-dark" onclick="saveNewRadioButton()" value="Add">
+          </div>
+
+        </div>
+
+                  
+        <div id="suggestion" class="play-area">
+
+          <div class="d-flex flex-column">
+            <h3 class="mb-0" id="current"><p style="color: #ffffff; " id="sugg"></p></h3>
+            <div id="adv" style="color: #fbfbfb;">
+              -
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <canvas id="capture" width="320" height="240" display="none"></canvas>
+  <p id="note">
+    Note: If apt song not found in user playlist , song played from app's playlist.
+  </p>
+    </div>
+
+  </body> 
+
+  <script src="\js\home.js"></script>
+
+</html>
