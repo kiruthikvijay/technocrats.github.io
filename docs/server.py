@@ -8,7 +8,7 @@ app = Flask(__name__,static_url_path="",static_folder="static")
 # use decorators to link the function to a url
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
 
 @app.route('/emotion', methods = ['POST'])
 def upload_file():
